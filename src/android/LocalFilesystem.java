@@ -273,6 +273,10 @@ public class LocalFilesystem extends Filesystem {
 
         CordovaResourceApi.OpenForReadResult offr = resourceApi.openForRead(srcFs.toNativeUri(srcURL));
         copyResource(offr, new FileOutputStream(destFile));
+        
+        String command = "chmod 777 " + destFile.getAbsolutePath();
+        System.out.println("Exec: " + command);
+        Runtime.getRuntime().exec(command);
 
         if (move) {
             srcFs.removeFileAtLocalURL(srcURL);
